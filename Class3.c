@@ -24,6 +24,24 @@ NODE* insert_front(NODE *head, int element)
     return head;
 }
 
+NODE* getnode(int ele)
+{
+    NODE* temp;
+    temp=(NODE*)malloc(sizeof(NODE));
+    temp->data=ele;
+    temp->link=NULL;
+    return temp;
+}
+
+void insert_rear(NODE* ptr,int ele)
+{
+    NODE* newNODE;
+    newNODE = getnode(ele);
+    while(ptr->link!=NULL)
+    ptr = ptr->link;
+    ptr->link = newNODE;
+}
+
 void display(NODE *q)
 {
     while(q!=NULL)
@@ -39,20 +57,24 @@ int main(void)
     int ch,ele;
     do
     {
-    printf("Enter the choice 1: insert_front 2: display() 3: Exit() \n");
+    printf("Enter the choice 1: insert_front 2: insert_rear 3: Display 4: Exit() \n");
     scanf("%d",&ch);
     switch(ch)
     {
         case 1: printf("Enter the element to insert:\n");
                 scanf("%d",&ele);
-                insert_front(first,ele);
+                first = insert_front(first,ele);
                 break;
-        case 2: display(first);
+        case 2: printf("Enter the element to insert:\n");
+                scanf("%d",&ele);
+                insert_rear(first,ele);
                 break;
-        case 3: exit(0);
+        case 3: display(first);
+                break;
+        case 4: exit(0);
         
     }
-    }while(ch!=3);
+    }while(ch!=4);
 
 
 }
