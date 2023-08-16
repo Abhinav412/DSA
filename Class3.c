@@ -24,6 +24,19 @@ NODE* insert_front(NODE *head, int element)
     return head;
 }
 
+NODE* delete_front(NODE*ptr)
+{
+    NODE*aux;
+    if(ptr==NULL)
+    printf("Empty list\n");
+    else
+    {
+        aux = ptr;
+        return ptr->link;
+        free(aux);
+    }
+}
+
 NODE* getnode(int ele)
 {
     NODE* temp;
