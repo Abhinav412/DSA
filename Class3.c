@@ -33,13 +33,19 @@ NODE* getnode(int ele)
     return temp;
 }
 
-void insert_rear(NODE* ptr,int ele)
+NODE* insert_rear(NODE* ptr,int ele)
 {
-    NODE* newNODE;
+    NODE* newNODE,*cur;
     newNODE = getnode(ele);
-    while(ptr->link!=NULL)
-    ptr = ptr->link;
-    ptr->link = newNODE;
+    if(ptr==NULL)
+    return newNODE;
+    else
+    {
+    while(cur->link!=NULL)
+    cur = cur->link;
+    cur->link = newNODE;
+    return ptr;
+    }
 }
 
 void display(NODE *q)
