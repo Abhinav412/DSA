@@ -1,4 +1,4 @@
-//Inserting node at front end of a list:
+//Linked lists revision
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -37,6 +37,23 @@ NODE* delete_front(NODE*ptr)
     }
 }
 
+void delete_rear(NODE*ptr)
+{
+    NODE *prev = NULL,*next = ptr;
+    if(ptr==NULL)
+    printf("Empty list\n");
+    else
+    {
+    while(next->link!=NULL)
+    {
+        prev = next;
+        next = next->link;
+    }
+    prev->link = NULL;
+    free(next);
+    }
+}
+
 NODE* getnode(int ele)
 {
     NODE* temp;
@@ -59,6 +76,7 @@ NODE* insert_rear(NODE* ptr,int ele)
     cur->link = newNODE;
     return ptr;
     }
+    ptr->link = newNODE;
 }
 
 void display(NODE *q)
@@ -70,13 +88,30 @@ void display(NODE *q)
     }
 }
 
+void key_search(NODE*ptr,int key)
+{
+    NODE *cur = ptr;
+    while(cur!=NULL && cur->data!=key)
+    {
+        cur = cur->link;
+    }
+    if(cur==NULL)
+    {
+        printf("Element does not exist");
+    }
+    else
+    {
+        printf("Element found");
+    }
+}
+
 int main(void)
 {
-    NODE *first  =NULL;
-    int ch,ele;
+    NODE *first = NULL;
+    int key,ch,ele;
     do
     {
-    printf("Enter the choice 1: insert_front 2: insert_rear 3: Display 4: Exit() \n");
+    printf("Enter the choice 1: insert_front 2: insert_rear 3: delete_front 4: delete_rear 5: key_search 6: Display() 7: Exit() \n");
     scanf("%d",&ch);
     switch(ch)
     {
@@ -86,14 +121,20 @@ int main(void)
                 break;
         case 2: printf("Enter the element to insert:\n");
                 scanf("%d",&ele);
-                insert_rear(first,ele);
+                first = insert_rear(first,ele);
                 break;
-        case 3: display(first);
+        case 3: first = delete_front(first);
                 break;
-        case 4: exit(0);
+        case 4: delete_rear(first);
+                break;
+        case 5: printf("Element to be searched:\n");
+                scanf("%d\n",&key);
+                key_search(first,key);
+                break;
+        case 6: display(first);
+                break;
+        case 7: exit(0);
         
     }
-    }while(ch!=4);
-
-
+    }while(ch!=8);
 }
