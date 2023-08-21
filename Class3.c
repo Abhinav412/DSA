@@ -133,7 +133,7 @@ int main(void)
                 break;
         case 6: display(first);
                 break;
-        case 7: exit(0);
+        case 7: exit(1);
         
     }
     }while(ch!=8);
