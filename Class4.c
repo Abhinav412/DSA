@@ -120,7 +120,6 @@ void Display()
     getch();
 }/*End of display() */
 
-
 //Function to count the number of nodes in the linked list
 void Count()
 {
