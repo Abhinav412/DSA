@@ -105,13 +105,24 @@ void key_search(NODE*ptr,int key)
     }
 }
 
+NODE* delete_any(NODE* ptr,int pos)
+{
+    NODE* aux = ptr;
+    if(pos==1)
+    {
+        ptr = ptr->link;
+        free(aux);
+        return ptr;
+    }
+}
+
 int main(void)
 {
     NODE *first = NULL;
-    int key,ch,ele;
+    int key,ch,ele,pos;
     do
     {
-    printf("Enter the choice 1: insert_front 2: insert_rear 3: delete_front 4: delete_rear 5: key_search 6: Display() 7: Exit() \n");
+    printf("Enter the choice 1: insert_front 2: insert_rear 3: delete_front 4: delete_rear 5: key_search 6: delete_any 7: Display() 8: Exit() \n");
     scanf("%d",&ch);
     switch(ch)
     {
@@ -131,10 +142,13 @@ int main(void)
                 scanf("%d\n",&key);
                 key_search(first,key);
                 break;
-        case 6: display(first);
+        case 6: printf("Enter the position to be deleted:\n");
+                scanf("%d\n",&pos);
+                first = delete_any(first,pos);
                 break;
-        case 7: exit(1);
-        
+        case 7: display(first);
+                break;
+        case 8: exit(1);
     }
     }while(ch!=8);
 }
