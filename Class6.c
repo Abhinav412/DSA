@@ -61,24 +61,73 @@ void delete_front(DLIST *p_dlist)
     }
 }
 
+void insert_rear(DLIST *p_dlist, int ele)
+{
+    NODE *newNode,*cur;
+    newNode = getnode(ele);
+    if(p_dlist->head == NULL)
+    {
+        p_dlist->head = newNode;
+    }
+    else
+    {
+        cur = p_dlist->head;
+        while(cur->rlink != NULL)
+        {
+            cur = cur->rlink;
+        }
+        cur->rlink = newNode;
+        newNode->llink = cur;
+    }
+}
+
+void delete_rear(DLIST *p_dlist)
+{
+    NODE *cur,*prev;
+    if(p_dlist->head == NULL)
+    {
+        printf("Cannot delete");
+        return;
+    }
+    else if(p_dlist->head->rlink == NULL)
+    {
+        cur = p_dlist->head;
+        free(cur);
+    }
+    else
+    {
+        cur = p_dlist->head;
+        while(cur->rlink != NULL)
+        {
+            cur = cur->rlink;
+        }
+        prev = cur->llink;
+        free(cur);
+        prev->rlink = NULL;
+    }
+}
+
 void display(DLIST *p_dlist)
 {
     NODE *aux = p_dlist->head;
     while(aux!=NULL)
     {
-        printf("\n%d",aux->data);
+        printf("%d\n",aux->data);
         aux = aux->rlink;
     }
 }
 
+void delete_pos(DLIST p_dlist, int pos)
+{}
+
 int main(void)
 {
-    int ch,ele;
+    int ch,ele,pos;
     DLIST listv;
     init(&listv);
     do
     {
-    printf("Enter the choice 1: insert_front 2: delete_front 3: display() 4: Exit\n");
+    printf("Enter the choice 1: insert_front 2: delete_front 3: display() 4: insert_rear 5: delete_rear 6: delete_pos 7: Exit\n");
     scanf("%d",&ch);
     switch(ch)
     {
@@ -90,7 +139,15 @@ int main(void)
                 break;
         case 3: display(&listv);
                 break;
-        case 4: exit(0);
+        case 4: printf("Enter the element to insert:\n");
+                scanf("%d",&ele);
+                insert_rear(&listv,ele);
+                break;
+        case 5: delete_rear(&listv);
+                break;
+        case 6: delete_pos(&listv,pos);
+                break;        
+        case 7: exit(0);
     }
     }while(ch!=4);
 }
