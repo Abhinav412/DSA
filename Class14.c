@@ -28,7 +28,9 @@ int dequeue(int*q,int*f,int*r)
     {
         if(*f == *r)
         {
+            x=q[*f];
             *r=*f=-1;
+            return(x);
         }
         x = q[*f];
         *f=(*f+1)%MAX;
