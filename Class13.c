@@ -81,12 +81,12 @@ int main(void)
     int ele,ch,x;
     while(1)
     {
-        printf("\n1.Enqueue 2.Dequeue 3.Display");
+        printf("1.Enqueue 2.Dequeue 3.Display\n");
         printf("Enter the choice:\n");
         scanf("%d",&ch);
         switch(ch)
         {
-            case 1: printf("Enter the element to be inserted\n");
+            case 1: printf("Enter the element to be inserted:\n");
                     scanf("%d",&ele);
                     enqueue(ptr,ele);
                     break;
