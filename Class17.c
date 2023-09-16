@@ -13,8 +13,7 @@ void insert_front(int*q,int*f,int*r,int ele)
     {
         if(*f=-1 && *r==-1)
         {
-            *f=0;
-            *r=0;
+            *f=*r=0;
             q[*f]=ele;
         }
         else if(*f==0)
