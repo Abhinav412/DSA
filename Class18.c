@@ -77,6 +77,42 @@ void inorder(NODE *root)
     }
 }
 
+void postorder(NODE *root)
+{
+    if(root!=NULL)
+    {
+        postorder(root->llink);
+        postorder(root->rlink);
+        printf("%d\n",root->data);
+    }
+}
+
+void preorder(NODE *root)
+{
+    if(root!=NULL)
+    {
+        printf("%d\n",root->data);
+        preorder(root->llink);
+        preorder(root->rlink);
+    }
+}
+
+int countleaf(NODE *root)
+{
+    if(root==NULL)
+    {
+        return 0;
+    }
+    else if(root->rlink==NULL && root->llink==NULL)
+    {
+        return 1;
+    }
+    else
+    {
+        return countleaf(root->rlink)+countleaf(root->llink);
+    }
+}
+
 int main(void)
 {
     int ch,ele,key,h;
