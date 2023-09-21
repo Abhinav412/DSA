@@ -113,6 +113,45 @@ int countleaf(NODE *root)
     }
 }
 
+NODE* delete_node(NODE *root,int ele)
+{
+    NODE *temp = NULL;
+    if(root==NULL)
+    {
+        return root;
+    }
+    if (ele < root->data)
+    {
+        root->llink = delete_node(root->llink,ele);
+    }
+    else if(ele > root->data)
+    {
+        root->rlink = delete_node(root->rlink,ele);
+    }
+    else
+    {
+        if(root->llink == NULL)
+        {
+            temp = root->rlink;
+            free(root);
+            return temp;
+        }
+        else if(root->rlink == NULL)
+        {
+            temp = root->llink;
+            free(root);
+            return temp;
+        }
+    }
+    NODE *cur = root->rlink;
+    while(cur->llink!=NULL)
+    {
+        cur = cur->llink;
+    }
+    root->data = cur->data;
+    root->rlink = delete_node(root->rlink,root->data);
+}
+
 int main(void)
 {
     int ch,ele,key,h;
