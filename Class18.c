@@ -67,7 +67,7 @@ void insert_tree(TREE *ptr, int key)
     }
 }
 
-void inorder(NODE *root)
+/*void inorder(NODE *root)
 {
     if(root!=NULL)
     {
@@ -75,7 +75,7 @@ void inorder(NODE *root)
         printf("%d\n",root->data);
         inorder(root->rlink);
     }
-}
+}*/
 
 void postorder(NODE *root)
 {
@@ -87,13 +87,62 @@ void postorder(NODE *root)
     }
 }
 
-void preorder(NODE *root)
+/*void preorder(NODE *root)
 {
     if(root!=NULL)
     {
         printf("%d\n",root->data);
         preorder(root->llink);
         preorder(root->rlink);
+    }
+}*/
+
+void preorder(NODE* root)
+{
+    int top=-1;
+    NODE *s[50],*cur;
+    if(cur==NULL)
+    {
+        return;
+    }
+    for(;;)
+    {
+        while(cur!=NULL)
+        {
+            printf("%d\t",cur->data);
+            s[++top] = cur;
+            cur = cur->llink;
+        }
+        if(top!=-1)
+        {
+            cur = s[top--];
+            cur = cur->rlink;
+        }
+    }
+}
+
+void inorder(NODE *root)
+{
+    NODE *s[50],*cur;
+    int top = -1;
+    if(root==NULL)
+    {
+        return;
+    }
+    cur=root;
+    for(;;)
+    {
+        while(cur!=NULL)
+        {
+            s[++top] = cur;
+            cur=cur->llink;
+        }
+        if(top!=-1)
+        {
+            cur=s[top--];
+            printf("%d\t",cur->data);
+            cur=cur->rlink;
+        }
     }
 }
 
