@@ -77,7 +77,7 @@ float eval(NODE* root)
     // Base case: leaf node
     if(root->llink==NULL && root->rlink==NULL)
     {
-        printf("Enter the value for %c",root->data);
+        printf("\nEnter the value for %c :\n",root->data);
         scanf("%d",&ele);
         return ele;
     }
