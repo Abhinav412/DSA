@@ -69,10 +69,38 @@ void inorder(NODE* root)
     }
 }
 
+// Function to evaluate expression tree
+float eval(NODE* root)
+{
+    int ele,lval,rval;
+
+    // Base case: leaf node
+    if(root->llink==NULL && root->rlink==NULL)
+    {
+        printf("Enter the value for %c",root->data);
+        scanf("%d",&ele);
+        return ele;
+    }
+
+    // Recursive case: evaluate left and right subtrees
+    lval = eval(root->llink);
+    rval = eval(root->rlink);
+
+    // Evaluate operation and return result
+    switch(root->data)
+    {
+        case '+': return lval+rval;
+        case '-': return lval-rval;
+        case '*': return lval*rval;
+        case '/': return lval/rval;
+    }
+}
+
 int main(void)
 {
     NODE* root = NULL;
     float res;
     root = create_exptree();
     inorder(root);
+    res = eval(root);
 }
