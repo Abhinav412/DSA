@@ -103,4 +103,5 @@ int main(void)
     root = create_exptree();
     inorder(root);
     res = eval(root);
+    printf("%f\n",res);
 }
