@@ -24,7 +24,7 @@ int main(void)
         scanf("%d",&ele);
         const_top_down(H,ele,&count);
     }
-    printf("\nThe heal elements are:");
+    printf("\nThe heap elements are:");
     for(int j=0;j<count;j++)
     {
         printf("%d ",H[j]);
