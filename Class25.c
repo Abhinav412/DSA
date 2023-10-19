@@ -1,7 +1,7 @@
 //Create a Graph use depth first search traversal
 #include<stdio.h>
 #include<stdlib.h>
-#define MAX 5
+#define MAX 10
 int visited[MAX];
 int adj[MAX][MAX];
 int n;
@@ -12,7 +12,7 @@ void create_graph()
     {
         printf("Enter the edge information for i and j:");
         scanf("%d %d",&i,&j);
-        if(i==1 && j==1)
+        if(i==-1 && j==-1)
         {
             break;
         }
@@ -46,9 +46,9 @@ void dfs(int v,int n,int*visited)
 void display()
 {
     int i,j;
-    for(i=0; i<=MAX; i++)
+    for(i=0; i<=n; i++)
     {
-        for(j=0; j<=MAX; j++)
+        for(j=0; j<=n; j++)
         {
             printf("%5d",adj[i][j]);
         }
