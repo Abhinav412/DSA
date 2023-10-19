@@ -66,12 +66,33 @@ void dfs(int adjmat[][maxnodes],int s,int *visited,int n)
         }
     }
 }
+
+void bfs(int adjmat[][maxnodes],int s,int *visited, int n)
+{
+    int q[20],f=0,r=-1,x;
+    q[++r]=s;
+    visited[s] = 1;
+    printf("\n%d",s);
+    while(f<=r)
+    {
+        x=q[f++];
+        for(int i=0; i<=n; i++)
+        {
+            if(adjmat[x][i]==1 && visited[i]!=1)
+            {
+                visited[i]=1;
+                printf("\n%d",i);
+                q[++r]=i;
+            }
+        }
+    }
+}
 int main(void)
 {
     int adjmat[maxnodes][maxnodes],ch,n,visited[maxnodes],source,flag=0,s,d;
     do
     {
-        printf("Enter a choice: 1.creategraph() 2. display() 3. dfs 4.exit()\n");
+        printf("Enter a choice: 1.creategraph() 2. display() 3. dfs 4. bfs 5. exit()\n");
         scanf("%d\n",&ch);
         switch (ch)
         {
@@ -88,14 +109,18 @@ int main(void)
                 {
                     if(visited[i] == 0)
                     {
-                        dfs(adjmat,s,visited,n);
+                        dfs(adjmat,i,visited,n);
                     }
                 }
                 dfs(adjmat,s,visited,n);
                 break;
-        case 4: exit(0);
+        case 4: initvisited(visited,n);
+                printf("Enter the source node:");
+                bfs(adjmat,s,visited,n);
+                break;
+        case 5: exit(0);
         default:printf("Invalid choice");
         }
     } 
-    while (ch<=4);
+    while (ch<=5);
 }
