@@ -107,7 +107,6 @@ int strong_conn(int adjmat[][maxnodes],int n,int *visited)
 
 int weak_conn(int adjmat[][maxnodes],int n,int *visited)
 {
-    //function to check if a graph is weakly connected
     int b[maxnodes][maxnodes];
     for(int i=1;i<=n;i++)
     {
