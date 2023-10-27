@@ -87,6 +87,51 @@ void bfs(int adjmat[][maxnodes],int s,int *visited, int n)
         }
     }
 }
+
+int strong_conn(int adjmat[][maxnodes],int n,int *visited)
+{
+    for(int i=1;i<=n;i++)
+    {
+        initvisited(visited,n);
+        dfs(adjmat,i,n,visited);
+        for(int j=1;j<=n;j++)
+        {
+            if(visited[j]==0)
+            {
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
+int weak_conn(int adjmat[][maxnodes],int n,int *visited)
+{
+    //function to check if a graph is weakly connected
+    int b[maxnodes][maxnodes];
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=n;j++)
+        {
+           if(adjmat[i][j]==1)
+           {
+            b[i][j] = 1;
+            b[j][i] = 1; 
+           }
+        }
+    }
+    initvisited(visited,n);
+    dfs(b,1,visited,n);
+    for(int i=0;i<=n;i++)
+    {
+        if(visited[i]==0)
+        {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 int main(void)
 {
     int adjmat[maxnodes][maxnodes],ch,n,visited[maxnodes],source,flag=0,s,d;
@@ -119,8 +164,22 @@ int main(void)
                 scanf("%d",&s);
                 bfs(adjmat,s,visited,n);
                 break;
-        case 5: exit(0);
-        default:printf("Invalid choice");
+        case 5: if(strong_conn(adjmat,n,visited))
+                {
+                    printf("\nThe graph is strongly connected.\n");
+                }
+                else
+                {
+                    if(weak_conn(adjmat,n,visited))
+                    {
+                        printf("The graph is weakly connected.\n");
+                    }
+                    else
+                    {
+                        printf("The graph is neither strongly nor weakly connected.\n");
+                    }
+                }
+                break;
         }
     } 
     while (ch<=5);
