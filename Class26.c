@@ -14,19 +14,18 @@ void initgraph(int adjmat[][maxnodes],int n)
     }
 }
 
-void display(int adjmat[][maxnodes],int n)
+void display(int adjmat[][maxnodes], int n)
 {
-    int i,j;
-    for(i=0; i<=n; i++)
+    int i, j;
+    for (i = 0; i < n; i++)
     {
-        for(j=0; j<=n; j++)
+        for (j = 0; j < n; j++)
         {
-            printf("%5d",adjmat[i][j]);
+            printf("%5d", adjmat[i][j]);
         }
         printf("\n");
     }
 }
-
 void create_graph(int adjmat[][maxnodes],int n)
 {
     int i,j;
@@ -131,13 +130,38 @@ int weak_conn(int adjmat[][maxnodes],int n,int *visited)
     return 1;
 }
 
+int path_dfs(int adjmat[][maxnodes], int s,int d,int *visited,int n,int path[],int *path_index)
+{
+    visited[s] = 1;
+    path[*path_index] = s;
+    (*path_index)++;
+    if(s==d)
+    {
+        printf("\nPath found");
+        for(int i=0; i<*path_index; i++)
+        {
+            printf("%d\n",path[i]);
+        }
+        return *path_index;
+    }
+    for(int i=1; i<=n; i++)
+    {
+        if(adjmat[s][i]==1 && visited[i] == 0)
+        {
+            path_dfs(adjmat,i,d,visited,n,path,path_index);
+        }
+    }
+    (*path_index)--;
+    visited[s] = 0;
+}
+
 int main(void)
 {
     int adjmat[maxnodes][maxnodes],ch,n,visited[maxnodes],source,flag=0,s,d;
     do
     {
-        printf("Enter a choice: 1.creategraph() 2. display() 3. dfs 4. bfs 5. exit()\n");
-        scanf("%d\n",&ch);
+        printf("Enter a choice: 1.creategraph() 2. display() 3. dfs 4. bfs 5. connection 6. Path_dfs 7. exit\n");
+        scanf("%d",&ch);
         switch (ch)
         {
         case 1: printf("\nEnter the number of nodes in the graph:\n");
@@ -149,6 +173,7 @@ int main(void)
                 break;
         case 3: initvisited(visited,n);
                 printf("Enter the source node:");
+                scanf("%d",&s);
                 for(int i=1;i<=n;i++)
                 {
                     if(visited[i] == 0)
@@ -163,7 +188,8 @@ int main(void)
                 scanf("%d",&s);
                 bfs(adjmat,s,visited,n);
                 break;
-        case 5: if(strong_conn(adjmat,n,visited))
+        case 5: initvisited(visited,n);
+                if(strong_conn(adjmat,n,visited))
                 {
                     printf("\nThe graph is strongly connected.\n");
                 }
@@ -179,7 +205,17 @@ int main(void)
                     }
                 }
                 break;
+        case 6: initvisited(visited,n);
+                printf("Enter the source node: ");
+                scanf("%d",&s);
+                printf("Enter the destination node: ");
+                scanf("%d",&d);
+                int path[maxnodes];
+                int path_index = 0;
+                path_dfs(adjmat,s,d,visited,n,path,&path_index);
+                break;
+        case 7: exit(0);
         }
     } 
-    while (ch<=5);
+    while (ch<=7);
 }
